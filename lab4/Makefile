@@ -10,7 +10,7 @@ run:
 	modload ./lab4.kmod
 
 stop:
-	modload lab4
+	modunload lab4
 
 clean:
 	rm /usr/src/sys/dev/lab4.c && \
