@@ -1,0 +1,6 @@
+build:
+	cp lab4.c /usr/src/sys/dev/lab4.c && \
+	mkdir /usr/src/sys/modules/lab4 && \
+	cp MakefileNetBSD /usr/src/sys/modules/lab4/Makefile && \
+	cd /usr/src/sys/modules/lab4/ && \
+	make

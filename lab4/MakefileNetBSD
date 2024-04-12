@@ -1,0 +1,6 @@
+.include "../Makefile.inc"
+KMOD=lab4
+.PATH: ${S}/dev
+SRCS=lab4.c
+
+.include <bsd.kmodule.mk>
