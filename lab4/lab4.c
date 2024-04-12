@@ -16,9 +16,12 @@ static int lab4_modcmd(modcmd_t cmd, void* arg) {
         return 0;
     }
     
-    int error = uvm_pglistalloc(PAGESIZE*10, 0, avail_end, 0, 0, &plist, 10, 0);
+    int error = uvm_pglistalloc(PAGESIZE*5, 0, avail_end, 0, 0, &plist, 5, 0);
     
-    if (!error) printf ("LAB4 loaded\n");
+    if (error) {
+        return error;
+    }
+
     struct vm_page *page = TAILQ_FIRST(&plist);
 
     for (int i = 0; page; ++i) {
@@ -26,9 +29,9 @@ static int lab4_modcmd(modcmd_t cmd, void* arg) {
         ppte = L2_BASE+pl2_i(va+PAGESIZE*i);
         paddr_t pa = VM_PAGE_TO_PHYS(page);
         printf("Page - %d\n", i+1);
-        printf("Valid - %d\n", ((*ppte & PG_V) ? 1 : 0));
-        printf("Used - %d\n", ((*ppte & PG_U) ? 1 : 0));
-        printf("Modified - %d\n", ((*ppte & PG_M) ? 1 : 0));
+        printf("Valid - %s\n", ((*ppte & PG_V) ? "true" : "false"));
+        printf("Used - %s\n", ((*ppte & PG_U) ? "true" : "false"));
+        printf("Modified - %s\n", ((*ppte & PG_M) ? "true" : "false"));
         printf("Physical address - 0x%lx\n", pa);
         printf("\n");
         page = TAILQ_NEXT(page, pageq.queue);
