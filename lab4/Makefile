@@ -4,3 +4,7 @@ build:
 	cp MakefileNetBSD /usr/src/sys/modules/lab4/Makefile && \
 	cd /usr/src/sys/modules/lab4/ && \
 	make
+
+run:
+	cd /usr/src/sys/modules/lab4/ && \
+	modload ./lab4.kmod
