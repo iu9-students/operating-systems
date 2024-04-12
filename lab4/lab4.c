@@ -37,6 +37,18 @@ static int lab4_modcmd(modcmd_t cmd, void* arg) {
         page = TAILQ_NEXT(page, pageq.queue);
    }
    
+    // Цикл для обработки всех выделенных виртуальных страниц
+    for (int i = 0; i < 10; ++i) {
+        vaddr_t current_va = va + PAGESIZE*i;
+        pd_entry_t *ppte = L2_BASE + pl2_i(current_va);
+        
+        printf("Virtual Address: 0x%lx\n", current_va);
+        printf("Valid - %s\n", ((*ppte & PG_V) ? "true" : "false"));
+        printf("Used - %s\n", ((*ppte & PG_U) ? "true" : "false"));
+        printf("Modified - %s\n", ((*ppte & PG_M) ? "true" : "false"));
+        printf("\n");
+    }
+   
    uvm_pglistfree(&plist);
    uvm_km_free(kernel_map, va, PAGESIZE*10, UVM_KMF_VAONLY);
    
