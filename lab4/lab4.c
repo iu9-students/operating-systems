@@ -16,7 +16,7 @@ static int lab4_modcmd(modcmd_t cmd, void* arg) {
         return 0;
     }
     
-    int error = uvm_pglistalloc(PAGESIZE*5, 0, avail_end, 0, 0, &plist, 5, 0);
+    int error = uvm_pglistalloc(PAGESIZE*6, 0, avail_end, 0, 0, &plist, 5, 0);
     
     if (!error) printf ("LAB4 loaded\n");
     struct vm_page *page = TAILQ_FIRST(&plist);
